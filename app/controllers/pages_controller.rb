@@ -7,6 +7,7 @@ class PagesController < ApplicationController
 
   #back-end code for pages/home
   def home
+    @posts = Post.all
   end
 
   #back-end code for pages/profile
@@ -17,9 +18,13 @@ class PagesController < ApplicationController
     else
       redirect_to root_path, :notice => "User Not Found!"
     end
+    
+    @posts = Post.all.where("user_id = ?",User.find_by_username(params[:id]))
+    
   end
 
   #back-end code for pages/explore
   def explore
+    @posts = Post.all
   end
 end
